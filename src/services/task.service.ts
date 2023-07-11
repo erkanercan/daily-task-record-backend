@@ -24,6 +24,16 @@ export const changeCategory = async (id: string, category: string) => {
   return task;
 };
 
+export const changeStatus = async (id: string, status: string) => {
+  //Check if status is valid
+  if (status !== "backlog" && status !== "in_progress" && status !== "done") {
+    throw new Error("Invalid status");
+  }
+
+  const task = await taskModel.findByIdAndUpdate(id, { status }, { new: true });
+  return task;
+};
+
 export const findTaskById = async (id: string) => {
   const task = await taskModel.findById(id).lean();
   return task;

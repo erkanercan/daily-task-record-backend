@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import {
   changeCategory,
+  changeStatus,
   createTask,
   findAllTasks,
   findTaskById,
@@ -17,6 +18,7 @@ export const createTaskHandler = async (
     const task = req.body;
     const user = res.locals.user;
     task.user = new Types.ObjectId(user._id);
+    task.status = "backlog";
     const createdTask = await createTask(task);
     res.status(201).json({
       status: "success",
@@ -61,6 +63,27 @@ export const changeCategoryHandler = async (
 ) => {
   try {
     const task = await changeCategory(req.params.id, req.body.category);
+    res.status(200).json({
+      status: "success",
+      data: {
+        task,
+      },
+    });
+  } catch (error) {
+    return res.status(500).json({
+      status: "fail",
+      message: "Something went wrong",
+    });
+  }
+};
+
+export const changeStatusHandler = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const task = await changeStatus(req.params.id, req.body.status);
     res.status(200).json({
       status: "success",
       data: {

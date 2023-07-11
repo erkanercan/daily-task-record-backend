@@ -13,12 +13,19 @@ export const updateTaskSchema = object({
   body: object({
     text: string(),
     category: ZodEnum.create(["bug", "feature", "refactor"]),
+    status: ZodEnum.create(["backlog", "in_progress", "done"]),
   }).partial(),
 });
 
 export const changeTaskCategorySchema = object({
   body: object({
     category: ZodEnum.create(["bug", "feature", "refactor"]),
+  }),
+});
+
+export const changeTaskStatusSchema = object({
+  body: object({
+    status: ZodEnum.create(["backlog", "in_progress", "done"]),
   }),
 });
 

@@ -8,6 +8,7 @@ import {
 import { validate } from "../middlewares/validate";
 import {
   changeTaskCategorySchema,
+  changeTaskStatusSchema,
   taskSchema,
   updateTaskSchema,
 } from "../schemas/task.schema";
@@ -22,6 +23,11 @@ router.put("/:id", validate(updateTaskSchema), createTaskHandler);
 router.post(
   "/:id/category",
   validate(changeTaskCategorySchema),
+  changeCategoryHandler
+);
+router.post(
+  "/:id/status",
+  validate(changeTaskStatusSchema),
   changeCategoryHandler
 );
 router.get("/:id", getTaskHandler);

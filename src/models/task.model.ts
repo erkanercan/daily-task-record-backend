@@ -12,6 +12,12 @@ enum Category {
   REFACTOR = "refactor",
 }
 
+enum Status {
+  BACKLOG = "backlog",
+  IN_PROGRESS = "in_progress",
+  DONE = "done",
+}
+
 @modelOptions({
   schemaOptions: {
     timestamps: true,
@@ -28,6 +34,9 @@ export class Task {
 
   @prop({ required: true })
   category: Category;
+
+  @prop({ required: true })
+  status: Status;
 }
 
 const taskModel = getModelForClass(Task);
