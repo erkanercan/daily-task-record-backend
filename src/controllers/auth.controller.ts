@@ -81,7 +81,9 @@ export const loginHandler = async (
     // Send Access Token
     res.status(200).json({
       status: "success",
-      accessToken,
+      data: {
+        user,
+      },
     });
   } catch (err: any) {
     next(err);
