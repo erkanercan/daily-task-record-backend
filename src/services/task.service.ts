@@ -69,6 +69,17 @@ export const findAllTasks = async (query?: FilterQuery<Task>) => {
       $options: "i",
     };
   }
+  if (query?.taskDay) {
+    const taskDay = new Date(query.taskDay as string);
+    const year = taskDay.getFullYear();
+    const month = taskDay.getMonth();
+    const date = taskDay.getDate();
+    query.taskDay = {
+      $gte: new Date(year, month, date, 0, 0, 0, 0),
+      $lt: new Date(year, month, date + 1, 0, 0, 0, 0),
+    };
+    console.log(query.taskDay);
+  }
 
   console.log(query);
 

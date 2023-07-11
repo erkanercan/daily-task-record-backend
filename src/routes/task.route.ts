@@ -4,6 +4,7 @@ import {
   createTaskHandler,
   getAllTasksHandler,
   getTaskHandler,
+  updateTaskHandler,
 } from "../controllers/task.controller";
 import { validate } from "../middlewares/validate";
 import {
@@ -19,7 +20,7 @@ const router = express.Router();
 router.use(deserializeUser, requireUser);
 
 router.post("/", validate(taskSchema), createTaskHandler);
-router.put("/:id", validate(updateTaskSchema), createTaskHandler);
+router.put("/:id", validate(updateTaskSchema), updateTaskHandler);
 router.post(
   "/:id/category",
   validate(changeTaskCategorySchema),

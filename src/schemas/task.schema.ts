@@ -1,7 +1,10 @@
-import { TypeOf, ZodEnum, object, string } from "zod";
+import { TypeOf, ZodEnum, date, object, string } from "zod";
 
 export const taskSchema = object({
   body: object({
+    taskDay: string({
+      required_error: "Task day is required",
+    }),
     text: string({
       required_error: "Task text is required",
     }),

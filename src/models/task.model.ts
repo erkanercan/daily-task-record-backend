@@ -30,6 +30,9 @@ export class Task {
   user: Ref<User>;
 
   @prop({ required: true })
+  taskDay: Date;
+
+  @prop({ required: true })
   text: string;
 
   @prop({ required: true })
