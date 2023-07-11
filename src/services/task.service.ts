@@ -63,6 +63,12 @@ export const findAllTasks = async (query?: FilterQuery<Task>) => {
       $lt: new Date(year, month, date + 1),
     };
   }
+  if (query?.text) {
+    query.text = {
+      $regex: query.text as string,
+      $options: "i",
+    };
+  }
 
   console.log(query);
 
